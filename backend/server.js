@@ -9,7 +9,14 @@ require('./models/Task');
 require('./models/Exam');
 
 const app = express();
-app.use(cors({ origin: process.env.CLIENT_URL || 'http://localhost:3000' }));
+app.use(cors({
+  origin: [
+    'http://localhost:3000',
+    'https://ai-study-planner-neon.vercel.app'
+  ],
+  credentials: true
+}));
+
 app.use(express.json());
 
 app.use('/api/auth',    require('./routes/authRouter'));
