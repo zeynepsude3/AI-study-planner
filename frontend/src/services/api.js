@@ -1,7 +1,7 @@
 import axios from 'axios';
 
 const api = axios.create({ 
-  baseURL: import.meta.env.VITE_API_URL || 'https://ai-study-planner-g8lo.onrender.com'
+ baseURL: process.env.REACT_APP_API_URL || 'https://ai-study-planner-g8lo.onrender.com'
 });
 
 api.interceptors.request.use(config => {
