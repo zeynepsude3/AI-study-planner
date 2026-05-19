@@ -42,3 +42,4 @@ sequelize.sync({ alter: true })
     console.error('❌ Veritabanı hatası:', err.message);
     process.exit(1);
   });
+// force redeploy 19 May 2026 Sal +03 19:52:05
