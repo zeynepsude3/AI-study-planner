@@ -8,6 +8,7 @@ import CoursesPage  from './pages/CoursesPage';
 import TasksPage    from './pages/TasksPage';
 import ExamsPage    from './pages/ExamsPage';
 import StudyPlanPage from './pages/StudyPlanPage';
+import AdminPage from './pages/AdminPage'; 
 
 const PrivateRoute = ({ children }) => {
   const { user, loading } = useAuth();
@@ -31,6 +32,7 @@ const App = () => (
           <Route path="tasks"       element={<TasksPage />} />
           <Route path="exams"       element={<ExamsPage />} />
           <Route path="study-plan"  element={<StudyPlanPage />} />
+          <Route path="admin" element={<AdminPage />} />
         </Route>
       </Routes>
     </BrowserRouter>

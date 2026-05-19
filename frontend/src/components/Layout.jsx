@@ -8,7 +8,9 @@ const navItems = [
   { to: '/tasks',      icon: '✅', label: 'Tasks'      },
   { to: '/exams',      icon: '📅', label: 'Exams'      },
   { to: '/study-plan', icon: '🤖', label: 'Study Plan' },
+  { to: '/admin', icon: '⚙️', label: 'Admin' },
 ];
+
 
 const Layout = () => {
   const { user, logout } = useAuth();
