@@ -24,7 +24,6 @@ app.use('/api/tasks',   require('./routes/taskRouter'));
 app.use('/api/courses', require('./routes/courseRouter'));
 app.use('/api/exams',   require('./routes/examRouter'));
 app.use('/api/ai',      require('./routes/aiRouter'));
-app.use('/api/admin',   require('./routes/adminRouter'));
 app.get('/api/health',  (req, res) => res.json({ status: 'ok' }));
 
 app.use((err, req, res, next) => {
