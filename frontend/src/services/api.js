@@ -1,7 +1,7 @@
-import axios from 'axios';
+ import axios from 'axios';
 
 const api = axios.create({
-  baseURL: 'https://ai-study-planner-g8lo.onrender.com/api'
+  baseURL: 'https://ai-study-planner-g8lo.onrender.com'
 });
 
 api.interceptors.request.use(config => {
