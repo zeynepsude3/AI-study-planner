@@ -1,146 +1,104 @@
-# 📚 AI-Powered Study Planner
+🎓 AI-Powered Study Planner
+A fully deployed web application that helps university students manage courses, exams, tasks, and daily study activities with an AI-powered recommendation engine.
+Live Demo: ai-study-planner-neon.vercel.app
+Backend API: ai-study-planner-g8lo.onrender.com
+Repository: github.com/zeynepsude3/AI-study-planner
 
-A web-based academic planning application that helps university students manage their courses, exams, assignments, and daily study tasks with AI-driven personalized recommendations.
+📋 Features
 
-🔗 **Live Demo:** [ai-study-planner-neon.vercel.app](https://ai-study-planner-neon.vercel.app)
+Dashboard — Daily tasks, upcoming exams, AI recommendations, progress stats
+Courses — Add and manage courses with credits, difficulty, and color labels
+Tasks — Full CRUD with priority stars, status filters, and due date countdown
+Exams — Exam tracking with color-coded countdown badges
+Study Plan — AI-generated personalized daily study schedule
+Admin Panel — User management and system statistics (admin role only)
+JWT Authentication — Secure login/register with bcrypt password hashing
 
----
 
-## ✨ Features
+🤖 AI Recommendation Engine
+The AIRecommendationService generates a ranked list of up to 8 study blocks by:
 
-- **Authentication** — Register and login with JWT-based security
-- **Course Management** — Add courses with credits, difficulty level, and color
-- **Task Tracking** — Create, update, and filter tasks by status and priority
-- **Exam Countdown** — Track upcoming exams with color-coded urgency badges
-- **AI Study Plan** — Personalized daily study recommendations based on exam proximity and task urgency
-- **Dashboard** — Overview of progress, upcoming exams, today's tasks, and AI suggestions
-- **Cloud Deployment** — Accessible from any device via Vercel + Render + Railway
+Exam proximity scoring — priority = 10 - daysLeft
+Task urgency — +5 if due today, +2 if due within 3 days
+Course completion weight — review blocks for courses below 50% completion
 
----
+Returns StudyBlock[] with type (exam_prep / task / review), suggested hours, and reason.
 
-## 🛠️ Tech Stack
+🛠 Tech Stack
+LayerTechnologyHostingFrontendReact.js 18, React Router v6, AxiosVercelBackendNode.js 18, Express.jsRenderBusiness LogicAIRecommendationService, bcryptjs, JWTRenderORMSequelize v6RenderDatabaseMySQL 8.0RailwayVersion ControlGit, GitHubGitHub
 
-| Layer | Technology |
-|-------|-----------|
-| Frontend | React.js 18, React Router v6, Axios |
-| Backend | Node.js, Express.js |
-| Database | MySQL 8.0 (Railway) |
-| ORM | Sequelize |
-| Authentication | JWT + bcryptjs |
-| Deployment | Vercel (frontend), Render (backend), Railway (DB) |
-
----
-
-## 🏗️ Architecture
-
-The system follows a **Layered Architecture** (4-tier):
-
-```
-Presentation Layer  →  React SPA (Vercel)
-Application Layer   →  Express REST API (Render)
-Business Logic      →  AIRecommendationService
-Data Layer          →  MySQL via Sequelize (Railway)
-```
-
----
-
-## 🤖 How the AI Works
-
-The AI Recommendation Module is a rule-based prioritization engine:
-
-- **Exam proximity** → exams within 14 days get highest priority (4h if tomorrow, 3h if 2-3 days, 2h if within a week)
-- **Task urgency** → tasks due within 3 days are marked urgent
-- **Course completion** → courses below 50% completion get review suggestions
-- All blocks are ranked by priority score and top 8 are returned as the daily study plan
-
----
-
-## 🚀 Getting Started (Local)
-
-### Prerequisites
-- Node.js 18+
-- MySQL 8.0
-
-### Backend Setup
-
-```bash
-cd backend
-npm install
-```
-
-Create a `.env` file in the `backend/` directory:
-
-```
-PORT=5001
-JWT_SECRET=your_secret_key
-DB_NAME=study_planner
-DB_USER=root
-DB_PASSWORD=your_mysql_password
-DB_HOST=localhost
-CLIENT_URL=http://localhost:3000
-```
-
-Create the database in MySQL:
-
-```sql
-CREATE DATABASE study_planner;
-```
-
-Start the backend:
-
-```bash
-node server.js
-```
-
-### Frontend Setup
-
-```bash
-cd frontend
-npm install
-npm start
-```
-
-The app will be available at `http://localhost:3000`
-
----
-
-## 📁 Project Structure
-
-```
+🗂 Project Structure
 AI-study-planner/
 ├── frontend/
-│   └── src/
-│       ├── App.jsx
-│       ├── context/AuthContext.jsx
-│       ├── services/api.js
-│       ├── components/Layout.jsx
-│       └── pages/
-│           ├── Dashboard.jsx
-│           ├── AuthPage.jsx
-│           ├── CoursesPage.jsx
-│           ├── TasksPage.jsx
-│           ├── ExamsPage.jsx
-│           └── StudyPlanPage.jsx
-└── backend/
-    ├── server.js
-    ├── config/database.js
-    ├── middleware/auth.js
-    ├── models/         (User, Course, Task, Exam)
-    ├── routes/         (authRouter, taskRouter, courseRouter, examRouter, aiRouter)
-    └── services/AIRecommendationService.js
-```
+│   ├── src/
+│   │   ├── pages/
+│   │   │   ├── Dashboard.jsx
+│   │   │   ├── AuthPage.jsx
+│   │   │   ├── CoursesPage.jsx
+│   │   │   ├── TasksPage.jsx
+│   │   │   ├── ExamsPage.jsx
+│   │   │   ├── StudyPlanPage.jsx
+│   │   │   └── AdminPage.jsx
+│   │   ├── context/
+│   │   │   └── AuthContext.jsx
+│   │   └── api.js
+│   └── package.json
+├── backend/
+│   ├── routes/
+│   │   ├── authRouter.js       # POST /api/auth/register, /login
+│   │   ├── taskRouter.js       # CRUD /api/tasks
+│   │   ├── courseRouter.js     # CRUD /api/courses
+│   │   ├── examRouter.js       # CRUD /api/exams
+│   │   ├── aiRouter.js         # POST /api/ai/plan, GET /recommendations
+│   │   └── adminrouter.js      # GET /api/admin/users, /stats
+│   ├── services/
+│   │   └── AIRecommendationService.js
+│   ├── models/
+│   │   ├── User.js
+│   │   ├── Course.js
+│   │   ├── Task.js
+│   │   └── Exam.js
+│   ├── middleware/
+│   │   └── authenticate.js
+│   └── server.js
+└── README.md
 
----
+🚀 Local Setup
+Prerequisites
 
-## 👥 Team
+Node.js 18+
+MySQL 8.0
 
-| Name | Role |
-|------|------|
-| Zeynep Sude Ağcabay | Frontend Developer |
-| Ezgi Turan | Backend Developer |
-| Murat Emre Doğan | Database & Architecture |
+Backend
+bashcd backend
+npm install
+Create .env:
+NODE_ENV=development
+PORT=5001
+JWT_SECRET=your_secret_key
+DB_HOST=localhost
+DB_PORT=3306
+DB_USER=root
+DB_PASSWORD=your_password
+DB_NAME=study_planner
+CLIENT_URL=http://localhost:3000
+bashnode server.js
+Frontend
+bashcd frontend
+npm install
+Create .env:
+REACT_APP_API_URL=http://localhost:5001/api
+bashnpm start
 
----
+☁️ Deployment
+ServicePlatformURLFrontendVercel (auto-deploy from GitHub)ai-study-planner-neon.vercel.appBackendRender (free tier, auto-sleep)ai-study-planner-g8lo.onrender.comDatabaseRailway MySQL 8.0trolley.proxy.rlwy.net:37160
+
+⚠️ Render free tier sleeps after 15 minutes of inactivity. First request may take ~30s to wake up.
+
+
+🗃 Database Schema
+TableKey Fieldsusersid, name, email, password (hashed), role (student/admin)coursesid, userId (FK), title, code, credits, difficulty, colortasksid, userId (FK), courseId (FK), title, dueDate, priority, statusexamsid, userId (FK), courseId (FK), title, examDate, duration, location
+Tables are auto-synced via Sequelize.sync({ alter: true }) on server startup.
 
 ## 📄 License
 
