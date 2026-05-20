@@ -15,11 +15,11 @@ const AdminPage = () => {
     setLoading(true);
     try {
       const [u, s] = await Promise.all([
-        api.get('/admin/stats'),
-        api.get('/admin/users'),
-      ]);
-      setUsers(u.data);
-      setStats(s.data);
+  api.get('/admin/users'),
+  api.get('/admin/stats'),
+]);
+setUsers(u.data);
+setStats(s.data);
     } catch (err) {
       setError('Admin erişimi gerekli veya veri yüklenemedi.');
     } finally { setLoading(false); }
