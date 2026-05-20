@@ -15,8 +15,8 @@ const AdminPage = () => {
     setLoading(true);
     try {
       const [u, s] = await Promise.all([
-        api.get('/api/admin/users'),
-        api.get('/api/admin/stats'),
+        api.get('/admin/stats'),
+        api.get('/admin/users'),
       ]);
       setUsers(u.data);
       setStats(s.data);
@@ -28,14 +28,14 @@ const AdminPage = () => {
   const handleDelete = async (id) => {
     if (!window.confirm('Bu kullanıcıyı silmek istediğine emin misin?')) return;
     try {
-      await api.delete(`/api/admin/users/${id}`);
+      await api.delete(`/admin/users/${id}`);
       fetchAll();
     } catch (err) { alert(err.response?.data?.error || 'Hata'); }
   };
 
   const handleRoleChange = async (id, role) => {
     try {
-      await api.put(`/api/admin/users/${id}/role`, { role });
+      await api.put(`/admin/users/${id}/role`, { role });
       fetchAll();
     } catch (err) { alert(err.response?.data?.error || 'Hata'); }
   };
